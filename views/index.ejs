@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fighting Demo</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <script src="script.js" defer></script>
+    </head>
+    <body>
+        <div class="audioContainer">
+            <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
+            <audio id="backgroundMusic" style="display:none" controls muted loop>
+                <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
+            </audio>
+        </div>
+        <div class="titleContainer">
+            <h1>Choose your FIGHTER</h1>
+        </div>
+        <div class="playerOneContainer">
+            <img id="playerOnePicture" style="display:none">
+            <button id="doneButton"><img src="assets/other/checkmark.png"></button>
+        </div>
+        <div class="selectionContainer">
+            <div class="selection">
+                <input type="image" class="option" src="assets/icons/cinnamoroll_sad.ico" />
+                <input type="image" class="option" src="assets/icons/gudetama.ico" />
+                <input type="image" class="option" src="assets/icons/keroppi.ico" />
+                <input type="image" class="option" src="assets/icons/kuromi.ico" />
+                <input type="image" class="option" src="assets/icons/my_melody.ico" />
+                <input type="image" class="option" src="assets/icons/pompompurin.ico" />
+                <input type="image" class="option" src="assets/icons/tuxedo_sam.ico" />
+            </div>
+        </div>
+        <div class="playerTwoContainer">
+            <img id="playerTwoPicture" style="display:none">
+        </div>
+    </body>
+</html>
