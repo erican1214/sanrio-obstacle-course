@@ -5,9 +5,10 @@ This is a two-player games that allows users to choose their own characters and 
 ## Credit Inspiration
 This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chromedino.com/). The coding for the obstacle course is also borrowed from [Kenny Yip Coding](https://www.kennyyipcoding.com/). Here is his [Youtube tutorial](https://www.youtube.com/watch?v=lgck-txzp9o&t=1125s) and [GitHub](https://github.com/ImKennyYip/chrome-dinosaur-game) of his code of the Dino Game. My code of the obstacle course was taken from his tutorial, but I have revised it to be two-player.
 
-## Important Information
-### URL to webpage (for those who don't want to download packages)
+## URL to webpage (for those who don't want to download packages)
+- https://sanrio-obstacle-course-erican1214.netlify.app/
 
+## Important Information for downloading packages
 ### Applications Needed
 - Node.js
 - VSCode (or any IDE)
@@ -32,6 +33,7 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 ### Compatability/Accessibility
 - This has only been tested on a Google Chrome Browser and may not be compatible with other browsers. The game is also not responsive to different window sizes.
 
+## Credits
 ### Image Attributions
 - All characters from Sanrio Co.
 - [candy.png](https://www.vecteezy.com/vector-art/1905248-set-of-candies-isolated-icon)
