@@ -9,31 +9,40 @@
     </head>
     <body>
         <div class="audioContainer">
-            <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
-            <audio id="backgroundMusic" style="display:none" controls muted loop>
-                <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
-            </audio>
+                <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
+                <audio id="backgroundMusic" style="display:none" controls muted loop>
+                    <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
+                </audio>
         </div>
-        <div class="titleContainer">
-            <h1>Choose your FIGHTER</h1>
-        </div>
-        <div class="playerOneContainer">
-            <img id="playerOnePicture" style="display:none">
-            <button id="doneButton"><img src="assets/other/checkmark.png"></button>
-        </div>
-        <div class="selectionContainer">
-            <div class="selection">
-                <input type="image" class="option" src="assets/icons/cinnamoroll_sad.ico" />
-                <input type="image" class="option" src="assets/icons/gudetama.ico" />
-                <input type="image" class="option" src="assets/icons/keroppi.ico" />
-                <input type="image" class="option" src="assets/icons/kuromi.ico" />
-                <input type="image" class="option" src="assets/icons/my_melody.ico" />
-                <input type="image" class="option" src="assets/icons/pompompurin.ico" />
-                <input type="image" class="option" src="assets/icons/tuxedo_sam.ico" />
+        <div id="startPage">
+            <div class="titleContainer">
+                <h1 id="message">Welcome to Sanrio Obstacle Course!<br>Choose your character!</h1>
+            </div>
+            <div class="playerOneContainer">
+                <img id="playerOnePicture" style="display:none">
+                <button id="doneFirst"><img src="assets/other/checkmark.png"></button>
+            </div>
+            <div class="selectionContainer">
+                <div class="selection">
+                    <button class="option"><input type="image" src="assets/icons/cinnamoroll_sad.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/gudetama.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/keroppi.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/kuromi.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/my_melody.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/pompompurin.ico" /></button>
+                    <button class="option"><input type="image" src="assets/icons/tuxedo_sam.ico" /></button>
+                </div>
+            </div>
+            <div class="playerTwoContainer">
+                <img id="playerTwoPicture" style="display:none">
+                <button id="doneSecond"><img src="assets/other/checkmark.png"></button>
             </div>
         </div>
-        <div class="playerTwoContainer">
-            <img id="playerTwoPicture" style="display:none">
+        <div id="playPage" style="display:none">
+            <div id="canvasContainer">
+                <canvas id="boardOne"></canvas>
+                <canvas id="boardTwo"></canvas>
+            </div>
         </div>
     </body>
 </html>
