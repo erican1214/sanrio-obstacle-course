@@ -38,15 +38,18 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 - All characters from Sanrio Co.
 - [candy.png](https://www.vecteezy.com/vector-art/1905248-set-of-candies-isolated-icon)
 - [candy_cane.png](https://www.clipartmax.com/middle/m2H7d3m2Z5G6K9i8_download-candy-png-images-background-christmas-clipart-candy-cane/)
+- [checkmark.png](https://illustoon.com/?id=7504)
 - [cherry_background.jpg](https://www.freepik.com/free-vector/red-hand-drawn-cherry-seamless-pattern-pink-social-template_16340842.htm)
 - [cloud_background.jpg](https://www.slidekit.com/cute-background/)
 - [daisy_background.jpg](https://www.freepik.com/free-vector/flower-background-desktop-wallpaper-cute-vector_18247662.htm)
 - [dessert_background.jpg](https://www.freepik.com/free-vector/hand-drawn-world-chocolate-day-background-with-chocolate-sweets_27571570.htm)
 - [lollipop.png](https://www.vexels.com/png-svg/preview/230820/pink-lollipop-cartoon)
 - [music_icon.png](https://www.freepik.com/free-vector/bright-music-note_145290248.htm)
+- [pink_arrow.png](https://www.vecteezy.com/png/36392390-blank-cute-pastel-pink-triangle-shape-icon-flat-design-illustration)
 - [pink_dessert_background.jpg](https://www.freepik.com/free-vector/flat-valentines-day-celebration-background_35805433.htm)
 - [pretzel.png]("https://www.vexels.com/png-svg/preview/251905/pretzel-color-stroke)
 - [sky_doodle_background.jpg](https://www.pinterest.com/pin/811492426589202785/)
+- [x_button.png](https://www.citypng.com/png-download/17453)
 
 ### Audio Attributions
 - [video-game-battle-music.wav](https://freesound.org/s/743699/) by MichaelLydian

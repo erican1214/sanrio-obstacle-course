@@ -10,11 +10,11 @@
     <body>
         <div class="audioContainer">
                 <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
-                <audio id="backgroundMusic" style="display:none" controls muted loop>
+                <audio id="music" style="display:none" controls muted loop>
                     <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
                 </audio>
         </div>
-        <div id="startPage">
+        <div id="characterSelectionPage">
             <div class="titleContainer">
                 <h1 id="message">Welcome to Sanrio Obstacle Course!<br>Choose your character!</h1>
             </div>
@@ -37,11 +37,52 @@
                 <img id="playerTwoPicture" style="display:none">
                 <button id="doneSecond"><img src="assets/other/checkmark.png"></button>
             </div>
+            <div id="continueContainer" style="display:none">
+                <button id="continueButton">Continue</button>
+                <button id="reselectButton">Reselect</button>
+            </div>
         </div>
-        <div id="playPage" style="display:none">
+        <div id="backgroundSelectionPage" style="display:none">
+            <div class="bgSelectionContainer">
+                <h1>Choose background for Player 1</h1>
+                <div class="bgSelection">
+                    <button id="leftArrowOne"><img src="assets/other/left_pink_arrow.png"></button>
+                    <div class="bgImageContainer">
+                        <img id="backgroundOne" src="assets/backgrounds/cherry_background.jpg">
+                    </div>
+                    <button id="rightArrowOne"><img src="assets/other/right_pink_arrow.png"></button>
+                </div>
+                <h1>Choose background for Player 2</h1>
+                <div class="bgSelection">
+                    <button id="leftArrowTwo"><img src="assets/other/left_pink_arrow.png"></button>
+                    <div class="bgImageContainer">
+                        <img id="backgroundTwo" src="assets/backgrounds/cherry_background.jpg">
+                    </div>
+                    <button id="rightArrowTwo"><img src="assets/other/right_pink_arrow.png"></button>
+                </div>
+            </div>
+            <button id="continueButtonTwo">Continue</button>
+        </div>
+        <div id="obstaclePage" style="display:none">
             <div id="canvasContainer">
                 <canvas id="boardOne"></canvas>
                 <canvas id="boardTwo"></canvas>
+            </div>
+            <div id="overlay"></div>
+            <div id="instructions">
+                <button id="closeButton"><img src="assets/other/x_button.png"></button>
+                <h2>How to play!</h2>
+                <ul>
+                    <li>This game is similar to the Chrome Dinosaur Game, where you have to 
+                    jump over several different obstacles for as long as you can.</li>
+                    <li>Player 1 (the top character) will use the "W" key to jump.</li>
+                    <li>Player 2 (the bottom character) will use the up arrow key to jump.</li>
+                    <li>Whoever hits the obstacle first loses!</li>
+                </ul>
+            </div>
+            <div id="restartContainer" style="display:none">
+                <button id="playAgainButton">Play Again?</button>
+                <button id="mainMenuButton">Go to Main Menu?</button>
             </div>
         </div>
     </body>

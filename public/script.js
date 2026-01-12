@@ -1,7 +1,9 @@
-// Variables
-const startPage = document.getElementById("startPage");
-const playPage = document.getElementById("playPage");
+// Variables for each "page"
+const characterSelectionPage = document.getElementById("characterSelectionPage");
+const backgroundSelectionPage = document.getElementById("backgroundSelectionPage");
+const obstaclePage = document.getElementById("obstaclePage");
 
+// Character Selection Page Variables
 let playerOnePicture = document.getElementById("playerOnePicture");
 let playerTwoPicture = document.getElementById("playerTwoPicture");
 
@@ -24,9 +26,14 @@ const doneFirst = document.getElementById("doneFirst");
 const doneSecond = document.getElementById("doneSecond");
 let firstSelected = false;
 
+const continueContainer = document.getElementById("continueContainer");
+const continueButton = document.getElementById("continueButton");
+const reselectButton = document.getElementById("reselectButton");
+
+// Variables for music elements
 const musicButton = document.getElementById("musicButton");
 let musicIcon = document.getElementById("musicIcon");
-let backgroundMusic = document.getElementById("backgroundMusic");
+let music = document.getElementById("music");
 
 const musicPics =
 {
@@ -34,23 +41,23 @@ const musicPics =
     "unmuted" : "assets/audio_icons/music_icon.png"
 };
 
-// Music
+// Music button function
 if (musicButton) {
     musicButton.addEventListener("click", event => {
-        if (backgroundMusic.muted == true) {
+        if (music.muted == true) {
             musicIcon.src = musicPics["unmuted"];
-            backgroundMusic.muted = false;
-            backgroundMusic.play();
+            music.muted = false;
+            music.play();
         }
         else {
             musicIcon.src = musicPics["muted"];
-            backgroundMusic.muted = true;
-            backgroundMusic.pause();
+            music.muted = true;
+            music.pause();
         }
     })
 }
 
-// Start Page
+// Character Selection Page Functions
 if (option) {
     for (let i = 0; i < option.length; i++) {
         option[i].addEventListener("click", event => {
@@ -61,6 +68,7 @@ if (option) {
                 playerOnePicture.src = fullBodyPictures[i];
                 if (doneFirst.style.display = "none") {
                     doneFirst.style.display = "block";
+                    doneFirst.disabled = false;
                 }
                 setTimeout(function() {
                     playerOnePicture.style.display = "block";
@@ -71,6 +79,7 @@ if (option) {
                 playerTwoPicture.src = fullBodyPictures[i];
                 if (doneSecond.style.display = "none") {
                     doneSecond.style.display = "block";
+                    doneSecond.disabled = false;
                 }
                 setTimeout(function() {
                     playerTwoPicture.style.display = "block";
@@ -93,9 +102,31 @@ if (doneSecond) {
         for (let i = 0; i < option.length; i++) {
             option[i].disabled = true;
         }
-        startPage.style.display = "none";
-        playPage.style.display = "flex";
-        setUpGame();
+
+        continueContainer.style.display = "flex";
+    })
+}
+
+if (reselectButton) {
+    reselectButton.addEventListener("click", event => {
+        playerOnePicture.style.display = "none";
+        playerTwoPicture.style.display = "none";
+        firstSelected = false;
+        doneFirst.style.display = "none";
+        doneSecond.style.display = "none";        
+
+        for (let i = 0; i < option.length; i++) {
+            option[i].disabled = false;
+        }
+
+        continueContainer.style.display = "none";
+    })
+}
+
+if (continueButton) {
+    continueButton.addEventListener("click", event => {
+        characterSelectionPage.style.display = "none";
+        backgroundSelectionPage.style.display = "flex";
     })
 }
 
@@ -115,8 +146,92 @@ if (doneSecond) {
 //     page2.style.display = "flex";
 // }
 
-// Play Page
-// Variables
+// Background Selection Page Variables
+const backgroundPictures = [
+    "assets/backgrounds/cherry_background.jpg",
+    "assets/backgrounds/cloud_background.jpg",
+    "assets/backgrounds/daisy_background.jpg",
+    "assets/backgrounds/dessert_background.jpg",
+    "assets/backgrounds/pink_dessert_background.jpg",
+    "assets/backgrounds/sky_doodle_background.jpg"
+];
+
+const backgroundOne = document.getElementById("backgroundOne");
+const backgroundTwo = document.getElementById("backgroundTwo"   );
+
+const leftArrowOne = document.getElementById("leftArrowOne");
+const rightArrowOne = document.getElementById("rightArrowOne");
+const leftArrowTwo = document.getElementById("leftArrowTwo");
+const rightArrowTwo = document.getElementById("rightArrowTwo");
+
+let currentOne = 0;
+let currentTwo = 0;
+
+let continueButtonTwo = document.getElementById("continueButtonTwo");
+
+if (leftArrowOne) {
+    leftArrowOne.addEventListener("click", event => {
+        currentOne -= 1;
+        if (currentOne < 0) {
+            currentOne = backgroundPictures.length - 1;
+        }
+        backgroundOne.src = backgroundPictures[currentOne];
+    })
+}
+
+if (rightArrowOne) {
+    rightArrowOne.addEventListener("click", event => {
+        currentOne += 1;
+        if (currentOne >= backgroundPictures.length) {
+            currentOne = 0;
+        }
+        backgroundOne.src = backgroundPictures[currentOne];
+    })
+}
+
+if (leftArrowTwo) {
+    leftArrowTwo.addEventListener("click", event => {
+        currentTwo -= 1;
+        if (currentTwo < 0) {
+            currentTwo = backgroundPictures.length -1;
+        }
+        backgroundTwo.src = backgroundPictures[currentTwo];
+    })
+}
+
+if (rightArrowTwo) {
+    rightArrowTwo.addEventListener("click", event => {
+        currentTwo += 1;
+        if (currentTwo >= backgroundPictures.length) {
+            currentTwo = 0
+        }
+        backgroundTwo.src = backgroundPictures[currentTwo];
+    })
+}
+
+if (continueButtonTwo) {
+    continueButtonTwo.addEventListener("click", event => {
+        backgroundSelectionPage.style.display = "none";
+        obstaclePage.style.display = "flex";
+        setUpGame();
+    })
+}
+
+// Obstacle Page Variables
+// Instruction Section
+const closeButton = document.getElementById("closeButton");
+const overlay = document.getElementById("overlay");
+const instructions = document.getElementById("instructions");
+
+if (closeButton) {
+    closeButton.addEventListener("click", event => {
+        instructions.style.display = "none";
+        overlay.style.display = "none";
+        startGame();
+    })
+}
+
+// Canvas Section
 let boardOne = document.getElementById("boardOne");
 let boardTwo = document.getElementById("boardTwo");
 let boardWidth = 750;
@@ -192,13 +307,18 @@ let gameOverTwo = false;
 let scoreOne = 0;
 let scoreTwo = 0;
 
+// Obstacle Page Functions
 // Setting up canvas after characters are chosen
 function setUpGame() {
+    boardOne.style.backgroundImage = "url(" + backgroundOne.src + ")";
+    boardOne.style.backgroundSize = "cover";
     playerOne.width = playerOnePicture.naturalWidth / (playerOnePicture.naturalHeight / playerOne.height);
     playerOneImg = new Image();
     playerOneImg.src = playerOnePicture.src;
     contextOne.drawImage(playerOneImg, playerOne.x, playerOne.y, playerOne.width, playerOne.height);
 
+    boardTwo.style.backgroundImage = "url(" + backgroundTwo.src + ")";
+    boardTwo.style.backgroundSize = "cover";
     playerTwo.width = playerTwoPicture.naturalWidth / (playerTwoPicture.naturalHeight / playerOne.height);
     playerTwoImg = new Image();
     playerTwoImg.src = playerTwoPicture.src;
@@ -215,11 +335,13 @@ function setUpGame() {
 
     pretzelImg = new Image();
     pretzelImg.src = "assets/obstacles/pretzel.png";
+}
 
+function startGame() {
     requestAnimationFrame(update);
     setInterval(placeAllObstacles, 1000);
     document.addEventListener("keydown", movePlayer);
-}   
+}
 
 function update() {
     if (!gameOverOne && !gameOverTwo) {
@@ -233,6 +355,7 @@ function update() {
         drawCourseTwo();
     }
     else {
+        restartContainer.style.display = "flex";
         return;
     }
     requestAnimationFrame(update);
@@ -293,20 +416,20 @@ function drawCourseTwo() {
 
 function movePlayer(key) {
     if ((!gameOverOne && !gameOverTwo)) {
-        if ((key.code == "ArrowUp") && playerOne.y == playerOneY) {
+        if ((key.code == "KeyW") && playerOne.y == playerOneY) {
             velocityOneY = -10;
         }
-        if ((key.code == "KeyW") && playerTwo.y == playerTwoY) {
+        if ((key.code == "ArrowUp") && playerTwo.y == playerTwoY) {
             velocityTwoY = -10;
         }
     }
     else if (!gameOverOne && gameOverTwo) {
-        if ((key.code == "ArrowUp") && playerOne.y == playerOneY) {
+        if ((key.code == "KeyW") && playerOne.y == playerOneY) {
             velocityOneY = -10;
         }
     }
     else if (gameOverOne && !gameOverTwo) {
-        if ((key.code == "KeyW") && playerTwo.y == playerTwoY) {
+        if ((key.code == "ArrowUp") && playerTwo.y == playerTwoY) {
             velocityTwoY = -10;
         }
     }
@@ -392,6 +515,40 @@ function detectCollision(objectOne, objectTwo) {
            objectOne.x + objectOne.width > objectTwo.x + 10 &&   //objectOne's top right corner passes objectTwo's top left corner
            objectOne.y - 10 < objectTwo.y + objectTwo.height &&  //objectOne's top left corner doesn't reach objectTwo's bottom left corner
            objectOne.y + objectOne.height > objectTwo.y + 10;    //objectOne's bottom left corner passes objectTwo's top left corner
+}
+
+// Restart Section
+const playAgainButton = document.getElementById("playAgainButton");
+const mainMenuButton = document.getElementById("mainMenuButton");
+const restartContainer = document.getElementById("restartContainer");
+
+if (playAgainButton) {
+    playAgainButton.addEventListener("click", event => {
+        gameOverOne = false;
+        gameOverTwo = false;
+        obstacleArrayOne = [];
+        obstacleArrayTwo = [];
+
+        contextOne.clearRect(0, 0, boardOne.width, boardOne.height);
+        contextOne.drawImage(playerOneImg, playerOneX, playerOneY, playerOne.width, playerOne.height);
+
+        contextTwo.clearRect(0, 0, boardTwo.width, boardTwo.height);
+        contextTwo.drawImage(playerTwoImg, playerTwoX, playerTwoY, playerTwo.width, playerTwo.height);
+
+        setTimeout(function() {
+            startGame();
+        }, 300);
+        restartContainer.style.display = "none";
+    })
+}
+
+if (mainMenuButton) {
+    mainMenuButton.addEventListener("click", event => {
+        gameOverOne = false;
+        gameOverTwo = false;
+        obstaclePage.style.display = "none";
+        characterSelectionPage.style.display = "flex";
+    })
 }
 
 // The code belows picks a random player as the second player
