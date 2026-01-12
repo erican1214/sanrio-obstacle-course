@@ -213,6 +213,9 @@ if (continueButtonTwo) {
     continueButtonTwo.addEventListener("click", event => {
         backgroundSelectionPage.style.display = "none";
         obstaclePage.style.display = "flex";
+        overlay.style.display = "flex";
+        instructions.style.display = "block";
+        restartContainer.style.display = "none";
         setUpGame();
     })
 }
@@ -227,11 +230,18 @@ if (closeButton) {
     closeButton.addEventListener("click", event => {
         instructions.style.display = "none";
         overlay.style.display = "none";
-        startGame();
+        if (!playedOnce) {
+            startGameFirstTime();
+        }
+        else {
+            startGameRepeat();
+        }
     })
 }
 
 // Canvas Section
+let playedOnce = false; //clearInterval does not work, so this will keep track if player replays game
+
 let boardOne = document.getElementById("boardOne");
 let boardTwo = document.getElementById("boardTwo");
 let boardWidth = 750;
@@ -274,25 +284,29 @@ let lollipopWidth = 47;
 let lollipopHeight = 70;
 let lollipopX = 700;
 let lollipopY = boardHeight - lollipopHeight;
-let lollipopImg;
+let lollipopImg = new Image();
+lollipopImg.src = "assets/obstacles/lollipop.png";
 
 let candyWidth = 89;
 let candyHeight = 70;
 let candyX = 700;
 let candyY = boardHeight - candyHeight;
-let candyImg;
+let candyImg = new Image();
+candyImg.src = "assets/obstacles/candy.png";
 
 let candyCaneWidth = 35
 let candyCaneHeight = 70;
 let candyCaneX = 700;
 let candyCaneY = boardHeight - candyCaneHeight;
-let candyCaneImg;
+let candyCaneImg = new Image();
+candyCaneImg.src = "assets/obstacles/candy_cane.png";
 
 let pretzelWidth = 70;
 let pretzelHeight = 70;
 let pretzelX = 700;
 let pretzelY = boardHeight - pretzelHeight;
-let pretzelImg;
+let pretzelImg = new Image();
+pretzelImg.src = "assets/obstacles/pretzel.png";
 
 let contextOne = boardOne.getContext("2d");
 let contextTwo = boardTwo.getContext("2d");
@@ -323,24 +337,22 @@ function setUpGame() {
     playerTwoImg = new Image();
     playerTwoImg.src = playerTwoPicture.src;
     contextTwo.drawImage(playerTwoImg, playerTwo.x, playerTwo.y, playerTwo.width, playerTwo.height);
-
-    lollipopImg = new Image();
-    lollipopImg.src = "assets/obstacles/lollipop.png";
-
-    candyImg = new Image();
-    candyImg.src = "assets/obstacles/candy.png";
-
-    candyCaneImg = new Image();
-    candyCaneImg.src = "assets/obstacles/candy_cane.png";
-
-    pretzelImg = new Image();
-    pretzelImg.src = "assets/obstacles/pretzel.png";
 }
 
-function startGame() {
+function startGameFirstTime() {
     requestAnimationFrame(update);
     setInterval(placeAllObstacles, 1000);
     document.addEventListener("keydown", movePlayer);
+}
+
+function startGameRepeat() {
+    requestAnimationFrame(update);
+
+    // Duplicate obstacles show in a cluster after the
+    // animation first update so the first set of
+    // obstacles are deleted
+    obstacleArrayOne = [];
+    obstacleArrayTwo = [];
 }
 
 function update() {
@@ -524,19 +536,11 @@ const restartContainer = document.getElementById("restartContainer");
 
 if (playAgainButton) {
     playAgainButton.addEventListener("click", event => {
-        gameOverOne = false;
-        gameOverTwo = false;
-        obstacleArrayOne = [];
-        obstacleArrayTwo = [];
+        resetCanvas();
 
-        contextOne.clearRect(0, 0, boardOne.width, boardOne.height);
-        contextOne.drawImage(playerOneImg, playerOneX, playerOneY, playerOne.width, playerOne.height);
-
-        contextTwo.clearRect(0, 0, boardTwo.width, boardTwo.height);
-        contextTwo.drawImage(playerTwoImg, playerTwoX, playerTwoY, playerTwo.width, playerTwo.height);
-
-        setTimeout(function() {
-            startGame();
+        setTimeout(function() { 
+            setUpGame();
+            startGameRepeat();
         }, 300);
         restartContainer.style.display = "none";
     })
@@ -544,11 +548,27 @@ if (playAgainButton) {
 
 if (mainMenuButton) {
     mainMenuButton.addEventListener("click", event => {
-        gameOverOne = false;
-        gameOverTwo = false;
+        resetCanvas();
         obstaclePage.style.display = "none";
         characterSelectionPage.style.display = "flex";
     })
+}
+
+function resetCanvas() {
+    playedOnce = true;
+    contextOne.clearRect(0, 0, boardOne.width, boardOne.height);
+    contextTwo.clearRect(0, 0, boardTwo.width, boardTwo.height);
+    gameOverOne = false;
+    gameOverTwo = false;
+    scoreOne = 0;
+    scoreTwo = 0;
+    obstacleArrayOne = [];
+    obstacleArrayTwo = [];
+
+    playerOne.y = boardHeight - playerOneHeight;
+    playerTwo.y = boardHeight - playerTwoHeight;
+    velocityOneY = 0;
+    velocityTwoY = 0;
 }
 
 // The code belows picks a random player as the second player

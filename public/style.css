@@ -310,6 +310,11 @@ button:disabled:hover {
 
 }
 
+#instructions h1 {
+    margin-bottom: 10px;
+    text-decoration: wavy;
+}
+
 #closeButton {
     position: fixed;
     width: 35px;
@@ -348,7 +353,6 @@ button:disabled:hover {
 
 #restartContainer {
     position: fixed;
-    display: none;
     bottom: 100px;
     right: 100px;
     z-index: 10;
