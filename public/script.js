@@ -146,18 +146,9 @@ if (continueButton) {
 //     page2.style.display = "flex";
 // }
 
-// Background Selection Page Variables
-const backgroundPictures = [
-    "assets/backgrounds/cherry_background.jpg",
-    "assets/backgrounds/cloud_background.jpg",
-    "assets/backgrounds/daisy_background.jpg",
-    "assets/backgrounds/dessert_background.jpg",
-    "assets/backgrounds/pink_dessert_background.jpg",
-    "assets/backgrounds/sky_doodle_background.jpg"
-];
-
-const backgroundOne = document.getElementById("backgroundOne");
-const backgroundTwo = document.getElementById("backgroundTwo"   );
+let bgList = document.getElementsByClassName("bgList");
+let bgOnePicture = document.getElementsByClassName("bgOnePicture");
+let bgTwoPicture = document.getElementsByClassName("bgTwoPicture");
 
 const leftArrowOne = document.getElementById("leftArrowOne");
 const rightArrowOne = document.getElementById("rightArrowOne");
@@ -166,6 +157,7 @@ const rightArrowTwo = document.getElementById("rightArrowTwo");
 
 let currentOne = 0;
 let currentTwo = 0;
+let translateX = 0;
 
 let continueButtonTwo = document.getElementById("continueButtonTwo");
 
@@ -173,19 +165,19 @@ if (leftArrowOne) {
     leftArrowOne.addEventListener("click", event => {
         currentOne -= 1;
         if (currentOne < 0) {
-            currentOne = backgroundPictures.length - 1;
+            currentOne = bgOnePicture.length - 1;
         }
-        backgroundOne.src = backgroundPictures[currentOne];
+        runSlider("one");
     })
 }
 
 if (rightArrowOne) {
     rightArrowOne.addEventListener("click", event => {
         currentOne += 1;
-        if (currentOne >= backgroundPictures.length) {
+        if (currentOne >= bgOnePicture.length) {
             currentOne = 0;
         }
-        backgroundOne.src = backgroundPictures[currentOne];
+        runSlider("one");
     })
 }
 
@@ -193,27 +185,45 @@ if (leftArrowTwo) {
     leftArrowTwo.addEventListener("click", event => {
         currentTwo -= 1;
         if (currentTwo < 0) {
-            currentTwo = backgroundPictures.length -1;
+            currentTwo = bgTwoPicture.length - 1;
         }
-        backgroundTwo.src = backgroundPictures[currentTwo];
+        runSlider("two");
     })
 }
 
 if (rightArrowTwo) {
     rightArrowTwo.addEventListener("click", event => {
         currentTwo += 1;
-        if (currentTwo >= backgroundPictures.length) {
+        if (currentTwo >= bgTwoPicture.length) {
             currentTwo = 0
         }
-        backgroundTwo.src = backgroundPictures[currentTwo];
+        runSlider("two");
     })
 }
+
+function runSlider(course) {
+    if (course === "one") {
+        translateX = bgOnePicture[currentOne].width * currentOne * -1;
+        console.log(translateX);
+        console.log(currentOne);
+        bgList[0].animate([{transform : `translateX(${translateX}px)`}],
+        {fill : "forwards",
+        duration : 500})
+    }
+    else {
+        translateX = bgTwoPicture[currentTwo].width * currentTwo * -1;
+        bgList[1].animate([{transform : `translateX(${translateX}px)`}],
+        {fill : "forwards",
+        duration : 500})
+    }
+}
+
 
 if (continueButtonTwo) {
     continueButtonTwo.addEventListener("click", event => {
         backgroundSelectionPage.style.display = "none";
         obstaclePage.style.display = "flex";
-        overlay.style.display = "flex";
+        overlay.style.display = "block";
         instructions.style.display = "block";
         restartContainer.style.display = "none";
         setUpGame();
@@ -221,26 +231,9 @@ if (continueButtonTwo) {
 }
 
 // Obstacle Page Variables
-// Instruction Section
-const closeButton = document.getElementById("closeButton");
-const overlay = document.getElementById("overlay");
-const instructions = document.getElementById("instructions");
-
-if (closeButton) {
-    closeButton.addEventListener("click", event => {
-        instructions.style.display = "none";
-        overlay.style.display = "none";
-        if (!playedOnce) {
-            startGameFirstTime();
-        }
-        else {
-            startGameRepeat();
-        }
-    })
-}
-
 // Canvas Section
 let playedOnce = false; //clearInterval does not work, so this will keep track if player replays game
+let winnerMessage = document.getElementById("winnerMessage");
 
 let boardOne = document.getElementById("boardOne");
 let boardTwo = document.getElementById("boardTwo");
@@ -324,14 +317,14 @@ let scoreTwo = 0;
 // Obstacle Page Functions
 // Setting up canvas after characters are chosen
 function setUpGame() {
-    boardOne.style.backgroundImage = "url(" + backgroundOne.src + ")";
+    boardOne.style.backgroundImage = `url(${bgOnePicture[currentOne].src})`;
     boardOne.style.backgroundSize = "cover";
     playerOne.width = playerOnePicture.naturalWidth / (playerOnePicture.naturalHeight / playerOne.height);
     playerOneImg = new Image();
     playerOneImg.src = playerOnePicture.src;
     contextOne.drawImage(playerOneImg, playerOne.x, playerOne.y, playerOne.width, playerOne.height);
 
-    boardTwo.style.backgroundImage = "url(" + backgroundTwo.src + ")";
+    boardTwo.style.backgroundImage = `url(${bgTwoPicture[currentTwo].src})`;
     boardTwo.style.backgroundSize = "cover";
     playerTwo.width = playerTwoPicture.naturalWidth / (playerTwoPicture.naturalHeight / playerOne.height);
     playerTwoImg = new Image();
@@ -367,6 +360,16 @@ function update() {
         drawCourseTwo();
     }
     else {
+        if (scoreOne > scoreTwo) {
+            winnerMessage.innerHTML = "Player 1 wins!";
+        }
+        else if (scoreOne < scoreTwo) {
+            winnerMessage.innerHTML = "Player 2 wins!";
+        }
+        else {
+            winnerMessage.innerHTML = "It's a tie!";
+        }
+        winnerMessage.style.display = "block";
         restartContainer.style.display = "flex";
         return;
     }
@@ -569,64 +572,69 @@ function resetCanvas() {
     playerTwo.y = boardHeight - playerTwoHeight;
     velocityOneY = 0;
     velocityTwoY = 0;
+
+    winnerMessage.innerHTML = "";
+    winnerMessage.style.display = "none";
 }
 
-// The code belows picks a random player as the second player
-// after the user chooses their character.
-// However, I decided that this will be a two player game
+// Instruction Section
+const closeButtonOne = document.getElementById("closeButtonOne");
+const overlay = document.getElementById("overlay");
+const instructions = document.getElementById("instructions");
+const helpButton = document.getElementById("helpButton");
 
-// let roboChoice = -1;
-// if (doneButton) {
-//     doneButton.addEventListener("click", event => {
-//         doneButton.disabled = true;
-//         addBorder(option[choice], "plum");
-//         for (let i = 0; i < option.length; i++) {
-//             option[i].disabled = true;
-//         }
+if (closeButtonOne) {
+    closeButtonOne.addEventListener("click", event => {
+        instructions.style.display = "none";
+        overlay.style.display = "none";
+        if (obstaclePage.style.display === "flex") {
+            if (!playedOnce) {
+                startGameFirstTime();
+            }
+            else {
+                startGameRepeat();
+            }
+            console.log("game replay");
+        }
+    })
+}
 
-//         roboChoice = Math.floor(Math.random() * option.length);
-//         console.log("choice" + roboChoice);
-//         playerTwoPicture.src = fullBodyPictures[roboChoice];
-//         moveThroughOptions();
-//     })
-// }
+if (helpButton) {
+    helpButton.addEventListener("click", event => {
+        if (instructions.style.display === "none") {
+            instructions.style.display = "block";
+            overlay.style.display = "block";
+        }
+        else {
+            instructions.style.display = "none";
+            overlay.style.display = "none";
+        }
+        credits.style.display = "none";
+    })
+}
 
-// function addBorder(element, color) {
-//     element.style.borderWidth = "5px";
-//     element.style.borderColor = color;
-//     element.style.borderStyle = "solid";
-// }
+// Credits Section
+const closeButtonTwo = document.getElementById("closeButtonTwo");
+const credits = document.getElementById("credits");
+const creditsButton = document.getElementById("creditsButton");
 
-// function removeBorder(element) {
-//     element.style.borderWidth = "0px";
-//     element.style.borderColor = "transparent";
-//     element.style.borderStyle = "none";
-// }
+if (closeButtonTwo) {
+    closeButtonTwo.addEventListener("click", event => {
+        credits.style.display = "none";
+        overlay.style.display = "none";
+    })
+}
 
-// async function moveThroughOptions() {
-//     await timer(100);
-//     for (let i = 0; i < option.length; i++) {
-//         option[i].style.opacity = 1;
-//     }
-//     for (let i = choice; i < option.length * 3; i++) {
-//         await timer(100);
-//         addBorder(option[i % option.length], "pink");
-//         if ((i % option.length) == roboChoice && i >= (option.length * 2)) {
-//             playerTwoPicture.style.display = "block";
-//             break;
-//         }
-//         else if (i % option.length == choice) {
-//             await timer(100);
-//             addBorder(option[i % option.length], "plum");
-//         }
-//         else {
-//             await timer(100);
-//             removeBorder(option[i % option.length]);
-//         }
-//     }
-// }
-
-// function timer(ms) {
-//     return new Promise(res => setTimeout(res, ms));
-// }
-
+if (creditsButton) {
+    creditsButton.addEventListener("click", event => {
+        if (credits.style.display === "none") {
+            credits.style.display = "block";
+            overlay.style.display = "block";
+        }
+        else {
+            credits.style.display = "none";
+            overlay.style.display = "none";
+        }
+        instructions.style.display = "none";
+    })
+}

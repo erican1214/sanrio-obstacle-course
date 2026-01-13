@@ -41,14 +41,16 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 - [checkmark.png](https://illustoon.com/?id=7504)
 - [cherry_background.jpg](https://www.freepik.com/free-vector/red-hand-drawn-cherry-seamless-pattern-pink-social-template_16340842.htm)
 - [cloud_background.jpg](https://www.slidekit.com/cute-background/)
+- [copyright_icon.png](https://commons.wikimedia.org/wiki/File:Pink_copyright.svg)
 - [daisy_background.jpg](https://www.freepik.com/free-vector/flower-background-desktop-wallpaper-cute-vector_18247662.htm)
 - [dessert_background.jpg](https://www.freepik.com/free-vector/hand-drawn-world-chocolate-day-background-with-chocolate-sweets_27571570.htm)
 - [lollipop.png](https://www.vexels.com/png-svg/preview/230820/pink-lollipop-cartoon)
 - [music_icon.png](https://www.freepik.com/free-vector/bright-music-note_145290248.htm)
 - [pink_arrow.png](https://www.vecteezy.com/png/36392390-blank-cute-pastel-pink-triangle-shape-icon-flat-design-illustration)
 - [pink_dessert_background.jpg](https://www.freepik.com/free-vector/flat-valentines-day-celebration-background_35805433.htm)
-- [pretzel.png]("https://www.vexels.com/png-svg/preview/251905/pretzel-color-stroke)
+- [pretzel.png](https://www.vexels.com/png-svg/preview/251905/pretzel-color-stroke)
 - [sky_doodle_background.jpg](https://www.pinterest.com/pin/811492426589202785/)
+- [question_mark.png](https://www.flaticon.com/free-icon/question-mark_10777970)
 - [x_button.png](https://www.citypng.com/png-download/17453)
 
 ### Audio Attributions

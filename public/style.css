@@ -40,34 +40,177 @@ button:disabled:hover {
     cursor: default;
 }
 
-.audioContainer {
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: whitesmoke;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: plum;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(194, 120, 194);
+}
+
+.audioContainer,
+.infoContainer {
     position: fixed;
     display: flex;
     width: fit-content;
     height: fit-content;
-    top: 10px;
-    left: 10px;
-    z-index: 10;
+    z-index: 20;
 }
 
-#musicButton {
+.audioContainer {
+    top: 10px;
+    left: 10px;
+}
+
+.infoContainer {
+    top: 10px;
+    right: 10px;
+    gap: 10px;
+}
+
+#musicButton,
+#helpButton,
+#creditsButton {
     background-color: transparent;
     border: none;
     width: 50px;
     height: 50px;
 }
 
-#musicIcon {
+#musicIcon,
+#helpButton img,
+#creditsButton img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+}
+
+
+#overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: pink;
+    opacity: 0.5;
+    z-index: 9;
+}
+
+#closeButtonOne,
+#closeButtonTwo {
+    position: fixed;
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    top: 5px;
+    right: 5px;
+    z-index: 20;
+}
+
+#closeButtonOne img,
+#closeButtonTwo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#instructions,
+#credits {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    padding: 1em;
+    z-index: 10;
+    text-align: center;
+    align-items: center;
+    background-color: beige;
+    box-shadow: 2px 2px 2px 1px plum;
+    border-radius: 5px;
+
+}
+
+#instructions h2,
+#credits h2 {
+    margin-bottom: 20px;
+    text-decoration: black wavy underline;
+}
+
+#instructions h2::before,
+#instructions h2::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background:url("assets/obstacles/lollipop.png") no-repeat;
+    background-size: contain;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#instructions p {
+    margin-bottom: 10px;
+}
+
+#instructions p::before {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background:url("assets/obstacles/lollipop.png") no-repeat;
+    background-size: contain;
+    float: left;
+    margin-right: 10px;
+}
+
+#credits {
+    height: 50%;
+    overflow-y: auto;
+}
+
+#credits h2::before,
+#credits h2::after,
+#credits h3::before,
+#credits h3::after {
+    content: "";
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background:url("assets/obstacles/pretzel.png") no-repeat;
+    background-size: contain;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#credits h3 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: black dashed underline;
+}
+
+#credits li {
+    list-style: none;
+}
+
+a {
+    color: rgb(194, 120, 194);
 }
 
 .titleContainer {
     position: fixed;
     width: 100%;
     height: fit-content;
-    top: 10%;
+    top: 65px;
     left: 0;
     background-color: aliceblue;
     opacity: 0.8;
@@ -163,7 +306,7 @@ button:disabled:hover {
     }
 }
 
-.selectionContainer {
+.characterContainer {
     position: relative;
     display: flex;
     width: 50%;
@@ -173,7 +316,7 @@ button:disabled:hover {
     z-index: 0;
 }
 
-.selection {
+.characterSelection {
     position: relative;
     display: flex;
     flex-wrap: wrap;
@@ -183,7 +326,7 @@ button:disabled:hover {
     justify-content: center;
 }
 
-.selection input[type="image"] {
+.characterSelection input[type="image"] {
     width: 100px;
     height: 100px;
     padding: 10px;
@@ -194,13 +337,13 @@ button:disabled:hover {
     transition: all 0.3s ease;
 }
 
-.selection input[type="image"]:focus {
+.characterSelection input[type="image"]:focus {
     opacity: 0.5;
 }
 
 #continueContainer {
     position: fixed;
-    bottom: 10%;
+    bottom: 20px;
     left: 50%;
     transform: translate(-50%, 0%);
     z-index: 10;
@@ -217,7 +360,7 @@ button:disabled:hover {
     border-radius: 5px;
 }
 
-.bgSelectionContainer {
+.bgContainer {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -234,15 +377,30 @@ button:disabled:hover {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
-.bgImageContainer {
+.bgSlider {
+    width: 750px;
+    height: 250px;
+    overflow: hidden;
+}
+
+.bgList {
+    display: flex;
+    width: max-content;
+    height: 100%;
+}
+
+.bgOneOption,
+.bgTwoOption {
+    display: flex;
     width: 750px;
     height: 250px;
 }
 
-#backgroundOne,
-#backgroundTwo {
+.bgOnePicture,
+.bgTwoPicture {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -274,8 +432,8 @@ button:disabled:hover {
     background-color: beige;
     box-shadow: 2px 2px 2px 1px plum;
     border-radius: 5px;
-    bottom: 100px;
-    right: 100px;
+    bottom: 20px;
+    right: 20px;
 }
 
 #obstaclePage {
@@ -283,52 +441,6 @@ button:disabled:hover {
     align-items: center;
     width: 100%;
     height: 100%;
-}
-
-#overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: pink;
-    opacity: 0.5;
-    z-index: 9;
-}
-
-#instructions {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    padding: 1em;
-    z-index: 10;
-    text-align: center;
-    align-items: center;
-    background-color: beige;
-    box-shadow: 2px 2px 2px 1px plum;
-    border-radius: 5px;
-
-}
-
-#instructions h1 {
-    margin-bottom: 10px;
-    text-decoration: wavy;
-}
-
-#closeButton {
-    position: fixed;
-    width: 35px;
-    height: 35px;
-    background-color: transparent;
-    top: 5px;
-    right: 5px;
-    z-index: 20;
-}
-
-#closeButton img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
 }
 
 #canvasContainer {
@@ -343,18 +455,18 @@ button:disabled:hover {
 
 #boardOne {
     background-color: pink;
-    border-bottom: 1px solid lightblue;
+        box-shadow: 2px 2px 2px 1px lightskyblue;
 }
 
 #boardTwo {
     background-color: beige;
-    border-bottom: 1px solid plum;
+    box-shadow: 2px 2px 2px 1px plum;
 }
 
 #restartContainer {
     position: fixed;
-    bottom: 100px;
-    right: 100px;
+    bottom: 20px;
+    right: 20px;
     z-index: 10;
     display: flex;
     gap: 20px;

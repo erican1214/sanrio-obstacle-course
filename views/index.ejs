@@ -9,11 +9,61 @@
     </head>
     <body>
         <div class="audioContainer">
-                <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
-                <audio id="music" style="display:none" controls muted loop>
-                    <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
-                </audio>
+            <button id="musicButton"><img id="musicIcon" src="assets/audio_icons/muted_music_icon.png"></button>
+            <audio id="music" style="display:none" controls muted loop>
+                <source src="assets/audio/video-game-battle-music.wav" type="audio/wav">
+            </audio>
         </div>
+        <div class="infoContainer">
+            <button id="helpButton"><img src="assets/other/question_mark.png"></button>
+            <button id="creditsButton"><img src="assets/other/copyright_icon.png"></button>
+        </div>
+
+        <div id="overlay" style="display:none"></div>
+        <div id="instructions" style="display:none">
+            <button id="closeButtonOne"><img src="assets/other/x_button.png"></button>
+            <h2>How to play!</h2>
+            <p>This game is similar to the Chrome Dinosaur Game, where you have to 
+            jump over several different obstacles for as long as you can.</p>
+            <p>Player 1 (the top character) will use the "W" key to jump.</p>
+            <p>Player 2 (the bottom character) will use the up arrow key to jump.</p>
+            <p>Whoever hits the obstacle first loses!</p>
+            <p>If you are on the obstacle course page, then clicking the 'X' button
+                will start the game immediately!</p>
+        </div>
+
+        <div id="credits" style="display:none">
+            <button id="closeButtonTwo"><img src="assets/other/x_button.png"></button>
+            <h2>Credits!</h2>
+            <h3>All characters from Sanrio!</h3>
+            <h3>Music by <a href="https://freesound.org/s/743699/" target="_blank">MichaelLydian!</a></h3>
+            <h3>Obstacle Pictures</h3>
+            <ul>
+                <li><a href="https://www.vecteezy.com/vector-art/1905248-set-of-candies-isolated-icon" target="_blank">Candy</a></li>
+                <li><a href="https://www.clipartmax.com/middle/m2H7d3m2Z5G6K9i8_download-candy-png-images-background-christmas-clipart-candy-cane/" target="_blank">Candy Cane</a></li>
+                <li><a href="https://www.vexels.com/png-svg/preview/230820/pink-lollipop-cartoon" target="_blank">Lollipop</a></li>
+                <li><a href="https://www.vexels.com/png-svg/preview/251905/pretzel-color-stroke" target="_blank">Pretzel</a></li>
+            </ul>
+            <h3>Backgrounds</h3>
+            <ul>
+                <li><a href="https://www.freepik.com/free-vector/red-hand-drawn-cherry-seamless-pattern-pink-social-template_16340842.htm" target="_blank">Cherry BG</a></li>
+                <li><a href="https://www.slidekit.com/cute-background/" target="_blank">Cloud BG</a></li>
+                <li><a href="https://www.freepik.com/free-vector/flower-background-desktop-wallpaper-cute-vector_18247662.htm" target="_blank">Daisy BG</a></li>
+                <li><a href="https://www.freepik.com/free-vector/hand-drawn-world-chocolate-day-background-with-chocolate-sweets_27571570.htm" target="_blank">Dessert BG</a></li>
+                <li><a href="https://www.freepik.com/free-vector/flat-valentines-day-celebration-background_35805433.htm" target="_blank">Pink Dessert BG</a></li>
+                <li><a href="https://www.pinterest.com/pin/811492426589202785/" target="_blank">Sky Doodle BG</a></li>
+            </ul>
+            <h3>Other Icons</h3>
+            <ul>
+                <li><a href="https://illustoon.com/?id=7504" target="_blank">Checkmark Icon</a></li>
+                <li><a href="https://commons.wikimedia.org/wiki/File:Pink_copyright.svg" target="_blank">Copyright Icon</a></li>
+                <li><a href="https://www.freepik.com/free-vector/bright-music-note_145290248.htm" target="_blank">Music Icon</a></li>
+                <li><a href="https://www.vecteezy.com/png/36392390-blank-cute-pastel-pink-triangle-shape-icon-flat-design-illustration" target="_blank">Pink Arrow Button</a></li>
+                <li><a href="https://www.flaticon.com/free-icon/question-mark_10777970" target="_blank">Question Mark Icon</a></li>
+                <li><a href="https://www.citypng.com/png-download/17453" target="_blank">X-Close Button</a></li>
+            </ul>
+        </div>
+
         <div id="characterSelectionPage">
             <div class="titleContainer">
                 <h1 id="message">Welcome to Sanrio Obstacle Course!<br>Choose your character!</h1>
@@ -22,8 +72,8 @@
                 <img id="playerOnePicture" style="display:none">
                 <button id="doneFirst"><img src="assets/other/checkmark.png"></button>
             </div>
-            <div class="selectionContainer">
-                <div class="selection">
+            <div class="characterContainer">
+                <div class="characterSelection">
                     <button class="option"><input type="image" src="assets/icons/cinnamoroll_sad.ico" /></button>
                     <button class="option"><input type="image" src="assets/icons/gudetama.ico" /></button>
                     <button class="option"><input type="image" src="assets/icons/keroppi.ico" /></button>
@@ -38,25 +88,39 @@
                 <button id="doneSecond"><img src="assets/other/checkmark.png"></button>
             </div>
             <div id="continueContainer" style="display:none">
-                <button id="continueButton">Continue</button>
                 <button id="reselectButton">Reselect</button>
+                <button id="continueButton">Continue</button>
             </div>
         </div>
         <div id="backgroundSelectionPage" style="display:none">
-            <div class="bgSelectionContainer">
+            <div class="bgContainer">
                 <h1>Choose background for Player 1</h1>
                 <div class="bgSelection">
                     <button id="leftArrowOne"><img src="assets/other/left_pink_arrow.png"></button>
-                    <div class="bgImageContainer">
-                        <img id="backgroundOne" src="assets/backgrounds/cherry_background.jpg">
+                    <div class="bgSlider">
+                        <div class="bgList">
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/cherry_background.jpg"></div>
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/cloud_background.jpg"></div>
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/daisy_background.jpg"></div>
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/dessert_background.jpg"></div>
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/pink_dessert_background.jpg"></div>
+                            <div class="bgOneOption"><img class="bgOnePicture" src="assets/backgrounds/sky_doodle_background.jpg"></div>
+                        </div>
                     </div>
                     <button id="rightArrowOne"><img src="assets/other/right_pink_arrow.png"></button>
                 </div>
                 <h1>Choose background for Player 2</h1>
                 <div class="bgSelection">
                     <button id="leftArrowTwo"><img src="assets/other/left_pink_arrow.png"></button>
-                    <div class="bgImageContainer">
-                        <img id="backgroundTwo" src="assets/backgrounds/cherry_background.jpg">
+                    <div class="bgSlider">
+                        <div class="bgList">
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/cherry_background.jpg"></div>
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/cloud_background.jpg"></div>
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/daisy_background.jpg"></div>
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/dessert_background.jpg"></div>
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/pink_dessert_background.jpg"></div>
+                            <div class="bgTwoOption"><img class="bgTwoPicture" src="assets/backgrounds/sky_doodle_background.jpg"></div>
+                        </div>
                     </div>
                     <button id="rightArrowTwo"><img src="assets/other/right_pink_arrow.png"></button>
                 </div>
@@ -64,22 +128,10 @@
             <button id="continueButtonTwo">Continue</button>
         </div>
         <div id="obstaclePage" style="display:none">
+            <h2 id="winnerMessage" style="display:none"></h2>
             <div id="canvasContainer">
                 <canvas id="boardOne"></canvas>
                 <canvas id="boardTwo"></canvas>
-            </div>
-            <div id="overlay"></div>
-            <div id="instructions">
-                <button id="closeButton"><img src="assets/other/x_button.png"></button>
-                <h2>How to play!</h2>
-                <p><br>This game is similar to the Chrome Dinosaur Game, where you have to 
-                jump over several different obstacles for as long as you can.
-                <br>*
-                <br>Player 1 (the top character) will use the "W" key to jump.
-                <br>*
-                <br>Player 2 (the bottom character) will use the up arrow key to jump.</li>
-                <br>*
-                <br>Whoever hits the obstacle first loses!</p>
             </div>
             <div id="restartContainer">
                 <button id="playAgainButton">Play Again?</button>
