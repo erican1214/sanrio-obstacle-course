@@ -1,6 +1,6 @@
 # Sanrio Obstacle Course
 ## About
-This is a two-player games that allows users to choose their own characters and compete in a simple obstacle course.
+This is a two-player games that allows users to choose their own characters and compete in a simple obstacle course. Currently not adjustable to play on mobile.
 
 ## Credit Inspiration
 This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chromedino.com/). The coding for the obstacle course is also borrowed from [Kenny Yip Coding](https://www.kennyyipcoding.com/). Here is his [Youtube tutorial](https://www.youtube.com/watch?v=lgck-txzp9o&t=1125s) and [GitHub](https://github.com/ImKennyYip/chrome-dinosaur-game) of his code of the Dino Game. My code of the obstacle course was taken from his tutorial, but I have revised it to be two-player.
@@ -31,7 +31,7 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 - Go on your browser and type "localhost:3000" in the search bar
 
 ### Compatability/Accessibility
-- This has only been tested on a Google Chrome Browser and may not be compatible with other browsers. The game is also not responsive to different window sizes.
+- This has only been tested on a Google Chrome Browser and may not be compatible with other browsers. The game is also not responsive to different window sizes. Currently not adjustable to play on mobile.
 
 ## Credits
 ### Image Attributions
