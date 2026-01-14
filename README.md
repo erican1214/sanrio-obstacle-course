@@ -49,6 +49,7 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 - [pink_arrow.png](https://www.vecteezy.com/png/36392390-blank-cute-pastel-pink-triangle-shape-icon-flat-design-illustration)
 - [pink_dessert_background.jpg](https://www.freepik.com/free-vector/flat-valentines-day-celebration-background_35805433.htm)
 - [pretzel.png](https://www.vexels.com/png-svg/preview/251905/pretzel-color-stroke)
+- [purple_cloud_background.jpg](https://www.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_13237210.htm)
 - [scoreboard_icon.png](https://www.flaticon.com/free-icon/scoreboard_4751919)
 - [sky_doodle_background.jpg](https://www.pinterest.com/pin/811492426589202785/)
 - [question_mark.png](https://www.flaticon.com/free-icon/question-mark_10777970)

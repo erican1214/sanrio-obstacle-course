@@ -1,3 +1,34 @@
+// Animation constants
+const timingForSlides = {
+    duration: 500,
+    fill: "forwards",
+    iterations: 1,
+};
+
+const slideToTop = {
+    opacity: [1, 0],
+    transform: ["translate(-50%, -50%)", "translate(-50%, -80%)"],
+};
+
+const slideFromTop = {
+    opacity: [0, 1],
+    transform: ["translate(-50%, -80%)", "translate(-50%, -50%)"],
+};
+
+const fadeInHalf = {
+    opacity: [0, 0.5],
+};
+
+const fadeOutHalf = {
+    opacity: [0.5, 0],
+};
+
+const timingForInfo = {
+    duration: 500,
+    fill : "forwards",
+    iterations: 1,
+};
+
 // Variables for each "page"
 const characterSelectionPage = document.getElementById("characterSelectionPage");
 const backgroundSelectionPage = document.getElementById("backgroundSelectionPage");
@@ -18,7 +49,11 @@ const fullBodyPictures =
     "assets/fullBody/kuromi_full_body.webp",
     "assets/fullBody/my_melody_full_body.webp",
     "assets/fullBody/pompompurin_full_body.png",
-    "assets/fullBody/tuxedo_sam_full_body.webp"
+    "assets/fullBody/tuxedo_sam_full_body.webp",
+    "assets/fullBody/badtz_maru_full_body.webp",
+    "assets/fullBody/chococat_full_body.webp",
+    "assets/fullBody/hello_kitty_full_body.webp",
+    "assets/fullBody/dear_daniel_full_body.webp"
 ]
 
 const doneButton = document.getElementsByClassName("doneButton");
@@ -130,22 +165,6 @@ if (continueButton) {
     })
 }
 
-// function timer(ms) {
-//     return new Promise(res => setTimeout(res, ms));
-// }
-
-// async function fadeInAndOutPages(page1, page2) {
-//     page1.style.animation = "none";
-//     page2.style.animation = "none";
-//     await timer(100);
-//     page1.style.cssText = "animation:fadeOut 5s ease; animation-fill-mode: forwards";
-//     await timer(500);
-//     page1.style.display = "none";
-//     page2.style.cssText = "animation:fadeIn 5s ease; animation-fill-mode: forwards";
-//     await timer(500);
-//     page2.style.display = "flex";
-// }
-
 let bgList = document.getElementsByClassName("bgList");
 let bgOnePicture = document.getElementsByClassName("bgOnePicture");
 let bgTwoPicture = document.getElementsByClassName("bgTwoPicture");
@@ -204,17 +223,11 @@ if (rightArrowTwo) {
 function runSlider(course) {
     if (course === "one") {
         translateX = bgOnePicture[currentOne].width * currentOne * -1;
-        console.log(translateX);
-        console.log(currentOne);
-        bgList[0].animate([{transform : `translateX(${translateX}px)`}],
-        {fill : "forwards",
-        duration : 500})
+        bgList[0].animate([{transform : `translateX(${translateX}px)`}], timingForSlides);
     }
     else {
         translateX = bgTwoPicture[currentTwo].width * currentTwo * -1;
-        bgList[1].animate([{transform : `translateX(${translateX}px)`}],
-        {fill : "forwards",
-        duration : 500})
+        bgList[1].animate([{transform : `translateX(${translateX}px)`}], timingForSlides);
     }
 }
 
@@ -223,8 +236,7 @@ if (continueButtonTwo) {
     continueButtonTwo.addEventListener("click", event => {
         backgroundSelectionPage.style.display = "none";
         obstaclePage.style.display = "flex";
-        overlay.style.display = "block";
-        instructions.style.display = "block";
+        openInstructions();
         restartContainer.style.display = "none";
         setUpGame();
     })
@@ -371,6 +383,7 @@ function update() {
         }
         winnerMessage.style.display = "block";
         restartContainer.style.display = "flex";
+        updateScoreboard();
         return;
     }
     requestAnimationFrame(update);
@@ -577,16 +590,107 @@ function resetCanvas() {
     winnerMessage.style.display = "none";
 }
 
+// Updating scores
+let playerOneScores = document.getElementsByClassName("playerOneScores");
+let playerTwoScores = document.getElementsByClassName("playerTwoScores");
+
+let playerOneScoresList = [];
+let playerTwoScoresList = [];
+
+let highScoreOne = document.getElementById("highScoreOne");
+let highScoreTwo = document.getElementById("highScoreTwo");
+
+let highScoreOneNum = 0;
+let highScoreTwoNum = 0;
+
+// Updates recent scores
+function updateScoreboard() {
+    playerOneScoresList.unshift(scoreOne);
+    playerTwoScoresList.unshift(scoreTwo);
+
+    if (playerOneScoresList.length > 5) {
+        playerOneScoresList.pop();
+        playerTwoScoresList.pop();
+    }
+
+    for (let i = 0; i < playerOneScoresList.length; i++) {
+        playerOneScores[i].innerHTML = playerOneScoresList[i];
+        playerTwoScores[i].innerHTML = playerTwoScoresList[i];
+    }
+
+    if (scoreOne > highScoreOneNum) {
+        highScoreOneNum = scoreOne;
+        highScoreOne.innerHTML = "<u>Player 1</u><br />" + highScoreOneNum;
+    }
+
+    if (scoreTwo > highScoreTwoNum) {
+        highScoreTwoNum = scoreTwo;
+        highScoreTwo.innerHTML = "<u>Player 2</u><br />" + highScoreTwoNum;
+    }
+
+    saveScoresToLocal();
+}
+
+// Saves recent and high scores to local browser even when browser is closed
+function saveScoresToLocal() {
+    for (let i = 0; i < playerOneScores.length; i++) {
+        if (playerOneScores[i].innerHTML == null) {
+            break;
+        }
+        localStorage.setItem("scoreOne" + i, playerOneScores[i].innerHTML);
+        localStorage.setItem("scoreTwo" + i, playerTwoScores[i].innerHTML);
+    }
+
+    if (highScoreOne.innerHTML == null) {
+        return;
+    }
+    localStorage.setItem("highScoreOne", highScoreOneNum);
+    localStorage.setItem("highScoreTwo", highScoreTwoNum);
+}
+
+// Loads recent scores saved to local browser if user has played already
+function loadLocalScores() {
+    let currentScore;
+    for (let i = 0; i < playerOneScores.length; i++) {
+        currentScore = localStorage.getItem("scoreOne" + i);
+        if (currentScore == null) {
+            break;
+        }
+        playerOneScores[i].innerHTML = currentScore;
+        playerOneScoresList[i] = currentScore;
+
+        currentScore = localStorage.getItem("scoreTwo" + i);
+        playerTwoScores[i].innerHTML = currentScore;
+        playerTwoScoresList[i] = currentScore;
+    }
+
+    currentScore = localStorage.getItem("highScoreOne");
+    if (currentScore == null) {
+        return;
+    }
+    highScoreOne.innerHTML = "<u>Player 1</u><br />" + currentScore;
+    highScoreOneNum = parseInt(currentScore);
+
+    currentScore = localStorage.getItem("highScoreTwo");
+    highScoreTwo.innerHTML = "<u>Player 2</u><br />" + currentScore;
+    highScoreTwoNum = parseInt(currentScore);
+}
+
+// Loads recent scores when window loads
+window.onload = loadLocalScores();
+
 // Instruction Section
 const closeButtonOne = document.getElementById("closeButtonOne");
 const overlay = document.getElementById("overlay");
 const instructions = document.getElementById("instructions");
 const helpButton = document.getElementById("helpButton");
+let instructionsShown = false;
+let creditsShown = false;
 
 if (closeButtonOne) {
     closeButtonOne.addEventListener("click", event => {
-        instructions.style.display = "none";
-        overlay.style.display = "none";
+        closeInstructions();
+
         if (obstaclePage.style.display === "flex") {
             if (!playedOnce) {
                 startGameFirstTime();
@@ -594,7 +698,6 @@ if (closeButtonOne) {
             else {
                 startGameRepeat();
             }
-            console.log("game replay");
         }
     })
 }
@@ -602,14 +705,14 @@ if (closeButtonOne) {
 if (helpButton) {
     helpButton.addEventListener("click", event => {
         if (instructions.style.display === "none") {
-            instructions.style.display = "block";
-            overlay.style.display = "block";
+            openInstructions();
         }
         else {
-            instructions.style.display = "none";
-            overlay.style.display = "none";
+            closeInstructions();
         }
-        credits.style.display = "none";
+        if (credits.style.display === "block") {
+            closeCredits();
+        }
     })
 }
 
@@ -620,21 +723,66 @@ const creditsButton = document.getElementById("creditsButton");
 
 if (closeButtonTwo) {
     closeButtonTwo.addEventListener("click", event => {
-        credits.style.display = "none";
-        overlay.style.display = "none";
+        closeCredits();
     })
 }
 
 if (creditsButton) {
     creditsButton.addEventListener("click", event => {
-        if (credits.style.display === "none") {
-            credits.style.display = "block";
-            overlay.style.display = "block";
+        if (credits.style.display === "none"){
+            openCredits();
         }
         else {
-            credits.style.display = "none";
-            overlay.style.display = "none";
+            closeCredits();
         }
-        instructions.style.display = "none";
+        if (instructions.style.display === "block") {
+            closeInstructions();
+        }
     })
+}
+
+function openInstructions() {
+    instructions.style.display = "block";
+    instructions.animate(slideFromTop, timingForInfo);
+    instructionsShown = true;
+
+    if (!creditsShown) {
+        overlay.style.display = "block";
+        overlay.animate(fadeInHalf, timingForInfo);
+    }
+}
+
+function closeInstructions() {
+    instructions.animate(slideToTop, timingForInfo);
+    instructionsShown = false;
+
+    if (!creditsShown) overlay.animate(fadeOutHalf, timingForInfo);
+
+    setTimeout(function() {
+        instructions.style.display = "none";
+        if (!creditsShown) overlay.style.display = "none";
+    }, 500);
+}
+
+function openCredits() {
+    credits.style.display = "block";
+    credits.animate(slideFromTop, timingForInfo);
+    creditsShown = true;
+
+    if (!instructionsShown) {
+        overlay.style.display = "block";
+        overlay.animate(fadeInHalf, timingForInfo);
+    }
+}
+
+function closeCredits() {
+    credits.animate(slideToTop, timingForInfo);
+    creditsShown = false;
+
+    if(!instructionsShown) overlay.animate(fadeOutHalf, timingForInfo);
+
+    setTimeout(function() {
+        credits.style.display = "none";
+        if(!instructionsShown) overlay.style.display = "none";
+    }, 500);
 }
