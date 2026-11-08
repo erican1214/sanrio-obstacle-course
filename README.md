@@ -5,10 +5,14 @@ This is a two-player games that allows users to choose their own characters and 
 ## URL to webpage
 - https://sanrio-obstacle-course-erican1214.netlify.app/
 
+## Download Instructions
+- You must download all files in the repository for the game to function
+- After downloading all files, open index.html on your preferred browser (playing locally)
+
 ## Compatability/Accessibility
 - This has only been tested on a Google Chrome Browser and may not be compatible with other browsers. The game is also not responsive to different window sizes. Currently not adjustable to play on mobile.
 
-## Credit Inspiration
+## Credit Inspiration and Tutorial
 This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chromedino.com/). The coding for the obstacle course is also borrowed from [Kenny Yip Coding](https://www.kennyyipcoding.com/). Here is his [Youtube tutorial](https://www.youtube.com/watch?v=lgck-txzp9o&t=1125s) and [GitHub](https://github.com/ImKennyYip/chrome-dinosaur-game) of his code of the Dino Game. My code of the obstacle course was taken from his tutorial, but I have revised it to be two-player.
 
 ## Credits
@@ -36,33 +40,11 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 - [question_mark.png](https://www.flaticon.com/free-icon/question-mark_10777970)
 - [x_button.png](https://www.citypng.com/png-download/17453)
 
-## Important Information for Downloading Packages
-### Applications Needed
-- Node.js
-- VSCode (or any IDE)
-- Google Chrome (or any browser)
-
-### Packages Needed
-- Express.js (The libraries and dependencies can be found in package-lock.json)
-
-- To install Express.js, navigate to the project directory, and run the following command prompts (for Windows, use npm.cmd instead of npm)
-    - npm init -y
-    - npm install express
-
-- More command prompts if necessary
-    - npm install ejs
-
-### How to run webpage (if you're using Node.js)
-- Navigate the project directory
-- Type "node server.js" if you are only interacting
-- Type "npm run dev" if you want to continuously edit this webpage (for Windows, use npm.cmd instead of npm)
-- Go on your browser and type "localhost:3000" in the search bar
-
 ## File Overview
 &larr; README.md
 - This file currently, shows details about how this webpage works
 
-&larr; index.ejs
+&larr; index.html
 - HTML file that shows content of the webpage
 
 &larr; style.css
@@ -70,9 +52,3 @@ This game is heavily inspired by the [Google Chrome Dinosaur Game](https://chrom
 
 &larr; script.js
 - Javascript file that adds interaction to the webpage and listens for events
-
-&larr; server.js
-- Javascript file that connects the code to server
-
-&larr; package.json, package-lock.json
-- Shows the necessary libraries/packages/dependencies for Node.js to run Express.js
